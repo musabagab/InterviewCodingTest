@@ -1,4 +1,4 @@
-package com.musabagab.interviewtest.Database
+package com.musabagab.interviewtest.Model
 
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize

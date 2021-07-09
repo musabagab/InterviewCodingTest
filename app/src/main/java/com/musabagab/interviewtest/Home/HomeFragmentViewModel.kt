@@ -31,7 +31,7 @@ class HomeFragmentViewModel(
             else -> "Hello"
         }
 
-        return "$greetingTime,  ${args.username}"
+        return "$greetingTime, ${args.username}"
     }
 
     fun getUserEmail(): String = args.email
