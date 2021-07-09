@@ -13,6 +13,8 @@
     <string name="greet_placeholder">Good morning, John</string>
     <string name="email_placeholder">johndoe@gmail.xom</string>
     <string name="medicine_name_placholder">Asprin</string>
-    <string name="medicine_dose_placholder">2 taps</string>
+    <string name="medicine_dose_placholder">2 tabs</string>
     <string name="medicine_strength_placholder">500mg</string>
+
+    <string name="fragment_details">Details</string>
 </resources>

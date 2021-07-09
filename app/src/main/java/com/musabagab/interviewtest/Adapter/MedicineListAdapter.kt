@@ -20,7 +20,10 @@ class MedicineListAdapterViewHolder(
 
     fun bind(medicine: Medicine) {
         medicineNameText.text = medicine.name
-        medicineDoseText.text = medicine.dose
+        medicineDoseText.text = when (medicine.dose) {
+            "" -> "-"
+            else -> medicine.dose
+        }
         medicineStrengthText.text = medicine.strength
     }
 }

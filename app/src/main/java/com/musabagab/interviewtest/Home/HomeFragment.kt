@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.musabagab.interviewtest.Adapter.MedicineListAdapter
@@ -46,18 +47,22 @@ class HomeFragment : Fragment() {
         binding.medicinesRecyclerview.layoutManager = LinearLayoutManager(requireContext())
         val adapter =
             MedicineListAdapter { clickedMedicine ->
-                Toast.makeText(
-                    requireContext(),
-                    clickedMedicine.name, Toast.LENGTH_LONG
+                val action = HomeFragmentDirections.actionHomeFragmentToDetailsFragment(
+                    clickedMedicine
                 )
-                    .show()
-            }
-        binding.medicinesRecyclerview.adapter = adapter
 
+                findNavController().navigate(action)
+            }
+
+        binding.medicinesRecyclerview.adapter = adapter
 
         // create the observer
         val listObserver = Observer<HomeFragmentViewState> { viewState ->
-            adapter.submitList(viewState.medicines)
+            if (viewState.medicines[0].name.isNotBlank()) {
+                binding.progressBar.visibility = View.INVISIBLE
+                binding.medicinesRecyclerview.visibility = View.VISIBLE
+                adapter.submitList(viewState.medicines)
+            }
         }
         // start observing
         repo.viewState.observe(viewLifecycleOwner, listObserver)
