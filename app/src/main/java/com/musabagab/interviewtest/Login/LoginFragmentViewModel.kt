@@ -5,10 +5,9 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.musabagab.interviewtest.databinding.FragmentLoginBinding
-
 import com.wajahatkarim3.easyvalidation.core.view_ktx.validator
 
-class LoginFragmentViewModelFactory(private val binding: FragmentLoginBinding) :
+class LoginFragmentViewModelFactory(private val binding: FragmentLoginBinding?) :
     ViewModelProvider.Factory {
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(LoginFragmentViewModel::class.java)) {
@@ -18,7 +17,7 @@ class LoginFragmentViewModelFactory(private val binding: FragmentLoginBinding) :
     }
 }
 
-class LoginFragmentViewModel(private val binding: FragmentLoginBinding) : ViewModel() {
+class LoginFragmentViewModel(private var binding: FragmentLoginBinding?) : ViewModel() {
 
     private val _isFormValid = MutableLiveData<Boolean>()
 
@@ -48,9 +47,9 @@ class LoginFragmentViewModel(private val binding: FragmentLoginBinding) : ViewMo
                 .nonEmpty()
                 .validEmail()
                 .addSuccessCallback {
-                    binding.emailField.error = null
+                    binding?.emailField?.error = ""
                 }.addErrorCallback {
-                    binding.emailField.error = it
+                    binding?.emailField?.error = it
                 }
                 .check()
             &&
@@ -60,9 +59,9 @@ class LoginFragmentViewModel(private val binding: FragmentLoginBinding) : ViewMo
                 .noSpecialCharacters()
                 .maxLength(8)
                 .addSuccessCallback {
-                    binding.userNameField.error = null
+                    binding?.userNameField?.error = ""
                 }.addErrorCallback {
-                    binding.userNameField.error = it
+                    binding?.userNameField?.error = it
                 }
                 .check()
 
@@ -73,18 +72,20 @@ class LoginFragmentViewModel(private val binding: FragmentLoginBinding) : ViewMo
                 .minLength(8)
                 .maxLength(20)
                 .addSuccessCallback {
-                    binding.passwordField.error = null
+                    binding?.passwordField?.error = ""
                 }.addErrorCallback {
-                    binding.passwordField.error = it
+                    binding?.passwordField?.error = it
                 }
                 .check()
-        ) {
+        ) {// validation success
             _isFormValid.postValue(true)
-        } else {
+        } else {// validation failed
             _isFormValid.postValue(false)
         }
 
     }
+
+
 
 
 }

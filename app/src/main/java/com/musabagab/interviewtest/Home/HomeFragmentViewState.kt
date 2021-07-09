@@ -1,6 +1,7 @@
 package com.musabagab.interviewtest.Home
 
+import com.musabagab.interviewtest.Database.Medicine
+
 data class HomeFragmentViewState(
-    val username: String,
-    val email: String
+    val medicines: List<Medicine>
 )

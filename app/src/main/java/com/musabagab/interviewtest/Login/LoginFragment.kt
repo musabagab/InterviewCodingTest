@@ -8,9 +8,18 @@ import android.widget.Toast
 import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
+import com.beust.klaxon.Klaxon
+import com.beust.klaxon.PathMatcher
 import com.musabagab.interviewtest.databinding.FragmentLoginBinding
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import retrofit2.Retrofit
+import retrofit2.converter.moshi.MoshiConverterFactory
+import retrofit2.http.GET
+import java.io.StringReader
+import java.util.regex.Pattern
 
 
 class LoginFragment : Fragment() {
@@ -21,6 +30,7 @@ class LoginFragment : Fragment() {
             viewModelFactory
         }
     )
+
 
     private var _binding: FragmentLoginBinding? = null
 
@@ -36,6 +46,9 @@ class LoginFragment : Fragment() {
 
         _binding = FragmentLoginBinding.inflate(inflater, container, false)
 
+        binding.emailField.visibility = View.GONE
+        binding.emailField.visibility = View.VISIBLE
+
         binding.emailField.editText?.doAfterTextChanged { email ->
             viewModel.email = email?.toString() ?: ""
         }
@@ -48,16 +61,20 @@ class LoginFragment : Fragment() {
             viewModel.password = password?.toString() ?: ""
         }
 
-        context?.let {
-            viewModelFactory = LoginFragmentViewModelFactory(binding)
-        }
 
-        viewModel.isFormValid.observe(viewLifecycleOwner, { valid ->
-            binding.loginBtn.isEnabled = valid ?: false
+        viewModelFactory = LoginFragmentViewModelFactory(binding)
+
+
+        viewModel.isFormValid.observe(viewLifecycleOwner, { isValid ->
+            binding.loginBtn.isEnabled = isValid
         })
 
         binding.loginBtn.setOnClickListener {
-            val action = LoginFragmentDirections.actionLoginFragmentToHomeFragment()
+            val action = LoginFragmentDirections
+                .actionLoginFragmentToHomeFragment(
+                    viewModel.username,
+                    viewModel.email
+                )
             findNavController().navigate(action)
         }
 
@@ -70,4 +87,9 @@ class LoginFragment : Fragment() {
     }
 
 
+
 }
+
+
+
+

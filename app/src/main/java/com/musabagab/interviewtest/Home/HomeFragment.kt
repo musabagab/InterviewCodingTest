@@ -5,15 +5,21 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.viewModels
-import com.musabagab.interviewtest.R
+import androidx.lifecycle.Observer
+import androidx.navigation.fragment.navArgs
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.musabagab.interviewtest.Adapter.MedicineListAdapter
+import com.musabagab.interviewtest.Repository.MedicineRepository
+
 import com.musabagab.interviewtest.databinding.FragmentHomeBinding
-import com.musabagab.interviewtest.databinding.FragmentLoginBinding
 
 
 class HomeFragment : Fragment() {
 
-
+    private val args: HomeFragmentArgs by navArgs()
+    private val repo = MedicineRepository()
     private lateinit var viewModelFactory: HomeFragmentViewModelFactory
     private val viewModel: HomeFragmentViewModel by viewModels(
         factoryProducer = {
@@ -30,8 +36,33 @@ class HomeFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
+        viewModelFactory = HomeFragmentViewModelFactory(args)
+
+        binding.greetingText.text = viewModel.getGreetingMessage()
+        binding.userEmailText.text = viewModel.getUserEmail()
+
+        // prepare the recyclerview
+        binding.medicinesRecyclerview.layoutManager = LinearLayoutManager(requireContext())
+        val adapter =
+            MedicineListAdapter { clickedMedicine ->
+                Toast.makeText(
+                    requireContext(),
+                    clickedMedicine.name, Toast.LENGTH_LONG
+                )
+                    .show()
+            }
+        binding.medicinesRecyclerview.adapter = adapter
+
+
+        // create the observer
+        val listObserver = Observer<HomeFragmentViewState> { viewState ->
+            adapter.submitList(viewState.medicines)
+        }
+        // start observing
+        repo.viewState.observe(viewLifecycleOwner, listObserver)
+
+
         return binding.root
     }
 
@@ -42,3 +73,6 @@ class HomeFragment : Fragment() {
 
 
 }
+
+
+
