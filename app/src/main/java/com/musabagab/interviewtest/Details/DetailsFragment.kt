@@ -1,18 +1,13 @@
 package com.musabagab.interviewtest.Details
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
-import com.musabagab.interviewtest.Home.HomeFragmentArgs
-import com.musabagab.interviewtest.Home.HomeFragmentViewModel
-import com.musabagab.interviewtest.Home.HomeFragmentViewModelFactory
-import com.musabagab.interviewtest.R
 import com.musabagab.interviewtest.databinding.FragmentDetailsBinding
-import com.musabagab.interviewtest.databinding.FragmentHomeBinding
 
 
 class DetailsFragment : Fragment() {

@@ -7,7 +7,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.musabagab.interviewtest.Model.Medicine
+import com.musabagab.interviewtest.Database.Medicine
 import com.musabagab.interviewtest.R
 
 
@@ -36,7 +36,8 @@ class MedicineListAdapter(
     companion object {
         val DIFF_CONFIG =
             object : DiffUtil.ItemCallback<Medicine>() {
-                override fun areItemsTheSame(oldItem: Medicine, newItem: Medicine): Boolean {
+                override fun areItemsTheSame(oldItem: Medicine,
+                                             newItem: Medicine): Boolean {
                     return oldItem === newItem
                 }
 
@@ -55,7 +56,8 @@ class MedicineListAdapter(
     ): MedicineListAdapterViewHolder {
         val itemView =
             LayoutInflater.from(parent.context)
-                .inflate(R.layout.medicine_list_item, parent, false)
+                .inflate(R.layout.medicine_list_item, parent,
+                    false)
         return MedicineListAdapterViewHolder(
             itemView
         )
