@@ -69,7 +69,16 @@ dependencies {
     def room_version = "2.3.0"
     implementation("androidx.room:room-runtime:$room_version")
     annotationProcessor "androidx.room:room-compiler:$room_version"
-    // To use Kotlin annotation processing tool (kapt)
     kapt("androidx.room:room-compiler:$room_version")
+    // Kotlin Extensions and Coroutines support for Room
+    implementation("androidx.room:room-ktx:$room_version")
+    // ViewModel scope for coroutines
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.1'
+    // Stetho
+    implementation 'com.facebook.stetho:stetho:1.6.0'
+
+
+
+
 
 }

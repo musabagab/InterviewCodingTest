@@ -1,23 +1,30 @@
 package com.musabagab.interviewtest.Login
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.*
+import com.musabagab.interviewtest.Database.UserDao
+import com.musabagab.interviewtest.Database.UserEntity
 import com.musabagab.interviewtest.databinding.FragmentLoginBinding
 import com.wajahatkarim3.easyvalidation.core.view_ktx.validator
+import kotlinx.coroutines.launch
+import java.util.*
 
-class LoginFragmentViewModelFactory(private val binding: FragmentLoginBinding?) :
+class LoginFragmentViewModelFactory(
+    private val binding: FragmentLoginBinding?,
+    private val userDao: UserDao
+) :
     ViewModelProvider.Factory {
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(LoginFragmentViewModel::class.java)) {
-            return LoginFragmentViewModel(binding) as T
+            return LoginFragmentViewModel(binding, userDao) as T
         }
         throw IllegalArgumentException("ViewModel is unknown")
     }
 }
 
-class LoginFragmentViewModel(private var binding: FragmentLoginBinding?) : ViewModel() {
+class LoginFragmentViewModel(
+    private var binding: FragmentLoginBinding?,
+    private val userDao: UserDao
+) : ViewModel() {
 
     private val _isFormValid = MutableLiveData<Boolean>()
 
@@ -53,7 +60,8 @@ class LoginFragmentViewModel(private var binding: FragmentLoginBinding?) : ViewM
                 }
                 .check()
             &&
-            username.validator()
+            username
+                .validator()
                 .nonEmpty()
                 .startWithNonNumber()
                 .noSpecialCharacters()
@@ -66,7 +74,8 @@ class LoginFragmentViewModel(private var binding: FragmentLoginBinding?) : ViewM
                 .check()
 
             &&
-            password.validator()
+            password
+                .validator()
                 .nonEmpty()
                 .noSpecialCharacters()
                 .minLength(8)
@@ -79,13 +88,26 @@ class LoginFragmentViewModel(private var binding: FragmentLoginBinding?) : ViewM
                 .check()
         ) {// validation success
             _isFormValid.postValue(true)
+
+            viewModelScope.launch {
+                storeUserIntoInRoom()
+            }
+
         } else {// validation failed
             _isFormValid.postValue(false)
         }
-
     }
 
+    private suspend fun storeUserIntoInRoom() {
+        userDao.insert(
+            UserEntity(
+                username = username,
+                email = email,
+                uid = UUID.randomUUID().toString()
+            )
+        )
 
+    }
 
 
 }

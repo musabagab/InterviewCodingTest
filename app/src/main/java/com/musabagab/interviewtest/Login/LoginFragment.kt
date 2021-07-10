@@ -11,6 +11,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.beust.klaxon.Klaxon
 import com.beust.klaxon.PathMatcher
+import com.musabagab.interviewtest.Database.UserDatabase
 import com.musabagab.interviewtest.databinding.FragmentLoginBinding
 import retrofit2.Call
 import retrofit2.Callback
@@ -61,8 +62,11 @@ class LoginFragment : Fragment() {
             viewModel.password = password?.toString() ?: ""
         }
 
+        context?.let { ctx ->
+            viewModelFactory =
+                LoginFragmentViewModelFactory(binding, UserDatabase(ctx).getUserDao())
+        }
 
-        viewModelFactory = LoginFragmentViewModelFactory(binding)
 
 
         viewModel.isFormValid.observe(viewLifecycleOwner, { isValid ->
@@ -85,7 +89,6 @@ class LoginFragment : Fragment() {
         super.onDestroyView()
         _binding = null
     }
-
 
 
 }

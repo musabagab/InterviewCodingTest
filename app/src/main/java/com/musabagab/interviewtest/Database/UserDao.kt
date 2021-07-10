@@ -8,11 +8,11 @@ import androidx.room.Update
 @Dao
 interface UserDao {
     @Insert
-    fun insert(userEntity: UserEntity)
+    suspend fun insert(userEntity: UserEntity)
 
     @Update
-    fun update(userEntity: UserEntity)
+    suspend fun update(userEntity: UserEntity)
 
     @Delete
-    fun delete(userEntity: UserEntity)
+    suspend fun delete(userEntity: UserEntity)
 }
