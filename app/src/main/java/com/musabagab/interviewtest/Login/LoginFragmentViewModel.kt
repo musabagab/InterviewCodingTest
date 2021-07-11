@@ -23,7 +23,7 @@ class LoginFragmentViewModelFactory(
 
 class LoginFragmentViewModel(
     private var binding: FragmentLoginBinding?,
-    private val userDao: UserDao
+    private val userDao: UserDao?
 ) : ViewModel() {
 
     private val _isFormValid = MutableLiveData<Boolean>()
@@ -99,7 +99,7 @@ class LoginFragmentViewModel(
     }
 
     private suspend fun storeUserIntoInRoom() {
-        userDao.insert(
+        userDao?.insert(
             UserEntity(
                 username = username,
                 email = email,
