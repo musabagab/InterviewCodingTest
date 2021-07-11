@@ -31,7 +31,6 @@ class MedicineRepository {
         createMedicineService().getData()?.enqueue(object : Callback<Any> {
             override fun onResponse(call: Call<Any>, response: Response<Any>) {
                 if (response.isSuccessful) {
-
                     // default value
                     _viewState.value = HomeFragmentViewState(
                         listOf(
@@ -41,6 +40,7 @@ class MedicineRepository {
                             Medicine("", "", "")
                         )
                     )
+
 
                     val pathMatcher = object : PathMatcher {
                         override fun pathMatches(path: String) = Pattern.matches(
