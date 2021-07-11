@@ -1,9 +1,6 @@
 package com.musabagab.interviewtest.Database
 
-import androidx.room.Dao
-import androidx.room.Delete
-import androidx.room.Insert
-import androidx.room.Update
+import androidx.room.*
 
 @Dao
 interface UserDao {
@@ -15,4 +12,7 @@ interface UserDao {
 
     @Delete
     suspend fun delete(userEntity: UserEntity)
+
+    @Query("SELECT * FROM users")
+    suspend fun getAllUsers(): List<UserEntity>
 }
