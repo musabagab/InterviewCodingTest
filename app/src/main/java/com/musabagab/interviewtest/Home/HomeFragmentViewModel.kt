@@ -20,10 +20,8 @@ class HomeFragmentViewModel(
 ) : ViewModel() {
 
 
-    fun getGreetingMessage(): String {
-        val c = Calendar.getInstance()
-
-        val greetingTime = when (c.get(Calendar.HOUR_OF_DAY)) {
+    fun getGreetingMessage(calendar: Calendar = Calendar.getInstance()): String {
+        val greetingTime = when (calendar.get(Calendar.HOUR_OF_DAY)) {
             in 0..11 -> "Good Morning"
             in 12..15 -> "Good Afternoon"
             in 16..20 -> "Good Evening"
@@ -35,7 +33,6 @@ class HomeFragmentViewModel(
     }
 
     fun getUserEmail(): String = args.email
-
 
 
 }
