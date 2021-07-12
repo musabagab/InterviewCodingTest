@@ -43,22 +43,21 @@ This is my coding test interview code for joining Arlib app
 
 # Libraries 
 
-• EasyValidation for form validation
+• [EasyValidation for form validation](https://github.com/wajahatkarim3/EasyValidation)
 
-• Retrofit2 with Moshi converter
+• [Retrofit 2 for network calls](https://github.com/square/retrofit)
 
-• klaxon library for parsing JSON
+• [klaxon library for parsing JSON](https://github.com/cbeust/klaxon)
 
-• Room DB
+• [Room Database](https://developer.android.com/training/data-storage/room)
 
-• Stetho debug bridge
+• [Stetho debug bridge](http://facebook.github.io/stetho/)
 
-• Strikt assertion library for kotlin
+• [Strikt assertion library](https://github.com/robfletcher/strikt)
 
-• MockK mocking library for Kotlin
+• [MockK: mocking library for Kotlin](https://mockk.io/)
 
-• JUnit for unit testing
-
+• [JUnit for unit testing](https://developer.android.com/training/testing/unit-testing/local-unit-tests)
 
 
   
