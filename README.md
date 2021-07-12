@@ -43,9 +43,9 @@ This is my coding test interview code for joining Arlib app
 
 # Libraries 
 
-• EasyValidation 
+• EasyValidation for form validation
 
-• Retrofit with Moshi converter
+• Retrofit2 with Moshi converter
 
 • klaxon library for parsing JSON
 
