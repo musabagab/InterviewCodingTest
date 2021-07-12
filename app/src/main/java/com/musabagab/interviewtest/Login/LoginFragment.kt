@@ -12,6 +12,7 @@ import androidx.navigation.fragment.findNavController
 import com.beust.klaxon.Klaxon
 import com.beust.klaxon.PathMatcher
 import com.musabagab.interviewtest.Database.UserDatabase
+import com.musabagab.interviewtest.Repository.UserDatabaseRepository
 import com.musabagab.interviewtest.databinding.FragmentLoginBinding
 import retrofit2.Call
 import retrofit2.Callback
@@ -64,7 +65,10 @@ class LoginFragment : Fragment() {
 
         context?.let { ctx ->
             viewModelFactory =
-                LoginFragmentViewModelFactory(binding, UserDatabase(ctx).getUserDao())
+                LoginFragmentViewModelFactory(
+                    binding,
+                    UserDatabaseRepository(UserDatabase(ctx).getUserDao())
+                )
         }
 
 

@@ -1,8 +1,8 @@
 package com.musabagab.interviewtest.Login
 
 import androidx.lifecycle.*
-import com.musabagab.interviewtest.Database.UserDao
 import com.musabagab.interviewtest.Database.UserEntity
+import com.musabagab.interviewtest.Repository.UserDatabaseRepository
 import com.musabagab.interviewtest.databinding.FragmentLoginBinding
 import com.wajahatkarim3.easyvalidation.core.view_ktx.validator
 import kotlinx.coroutines.launch
@@ -10,12 +10,12 @@ import java.util.*
 
 class LoginFragmentViewModelFactory(
     private val binding: FragmentLoginBinding?,
-    private val userDao: UserDao
+    private val userRepo: UserDatabaseRepository
 ) :
     ViewModelProvider.Factory {
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(LoginFragmentViewModel::class.java)) {
-            return LoginFragmentViewModel(binding, userDao) as T
+            return LoginFragmentViewModel(binding, userRepo) as T
         }
         throw IllegalArgumentException("ViewModel is unknown")
     }
@@ -23,7 +23,7 @@ class LoginFragmentViewModelFactory(
 
 class LoginFragmentViewModel(
     private var binding: FragmentLoginBinding?,
-    private val userDao: UserDao?
+    private val userRepo: UserDatabaseRepository?
 ) : ViewModel() {
 
     private val _isFormValid = MutableLiveData<Boolean>()
@@ -99,14 +99,13 @@ class LoginFragmentViewModel(
     }
 
     private suspend fun storeUserIntoInRoom() {
-        userDao?.insert(
+        userRepo?.insertUser(
             UserEntity(
                 username = username,
                 email = email,
                 uid = UUID.randomUUID().toString()
             )
         )
-
     }
 
 

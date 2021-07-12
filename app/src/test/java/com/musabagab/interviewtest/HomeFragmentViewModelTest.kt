@@ -22,7 +22,7 @@ class HomeFragmentViewModelTest {
     }
 
     @Test
-    fun testIfTheGreetingMessageContainTheName() {
+    fun testIfTheGreetingMessageContainsTheName() {
         val greetingMessage = viewModel.getGreetingMessage()
 
         assert(greetingMessage.contains(args.username))
