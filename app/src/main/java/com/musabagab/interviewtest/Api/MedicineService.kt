@@ -1,5 +1,6 @@
 package com.musabagab.interviewtest.Api
 
+import com.musabagab.interviewtest.BASE_URL
 import com.musabagab.interviewtest.MEDICINES_URL
 import retrofit2.Call
 import retrofit2.Retrofit
@@ -13,9 +14,6 @@ interface MedicineService {
 }
 
 fun createMedicineService(): MedicineService {
-    val BASE_URL = "https://run.mocky.io/v3/"
-
-
     val retrofit = Retrofit.Builder()
         .baseUrl(BASE_URL)
         .addConverterFactory(MoshiConverterFactory.create())

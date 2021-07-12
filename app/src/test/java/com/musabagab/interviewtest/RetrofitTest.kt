@@ -32,7 +32,13 @@ class RetrofitTest {
                         }
                     }
                 }
+
                 override fun onFailure(call: Call<Any>, t: Throwable) {
+                    expectThat(t.message) {
+                        assertThat("it has an error message") {
+                            it.toString().isNotEmpty()
+                        }
+                    }
                 }
 
             })

@@ -17,7 +17,7 @@ import org.junit.Rule
 import org.junit.Test
 
 @ExperimentalCoroutinesApi
-class LoginViewModelTest {
+class LoginFragmentViewModelTest {
 
     private val dispatcher = TestCoroutineDispatcher()
 
