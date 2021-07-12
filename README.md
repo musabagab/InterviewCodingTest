@@ -41,6 +41,25 @@ This is my coding test interview code for joining Arlib app
 ![Alt Text](https://s6.gifyu.com/images/my_project_demo.gif)
 
 
+# Libraries 
+
+• EasyValidation 
+
+• Retrofit with Moshi converter
+
+• klaxon library for parsing JSON
+
+• Room DB
+
+• Stetho debug bridge
+
+• Strikt assertion library for kotlin
+
+• MockK mocking library for Kotlin
+
+• Kotlin Coroutines ⚙️
+
+
   
 # Tests
 
