@@ -6,7 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import com.beust.klaxon.Klaxon
 import com.beust.klaxon.PathMatcher
 import com.musabagab.interviewtest.Api.createMedicineService
-import com.musabagab.interviewtest.Database.Medicine
+import com.musabagab.interviewtest.Model.Medicine
 import com.musabagab.interviewtest.Home.HomeFragmentViewState
 import retrofit2.Call
 import retrofit2.Callback

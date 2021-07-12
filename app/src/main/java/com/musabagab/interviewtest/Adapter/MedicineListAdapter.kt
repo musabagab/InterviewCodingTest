@@ -7,7 +7,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.musabagab.interviewtest.Database.Medicine
+import com.musabagab.interviewtest.Model.Medicine
 import com.musabagab.interviewtest.R
 
 
@@ -37,7 +37,8 @@ class MedicineListAdapter(
         val DIFF_CONFIG =
             object : DiffUtil.ItemCallback<Medicine>() {
                 override fun areItemsTheSame(oldItem: Medicine,
-                                             newItem: Medicine): Boolean {
+                                             newItem: Medicine
+                ): Boolean {
                     return oldItem === newItem
                 }
 

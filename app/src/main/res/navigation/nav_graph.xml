@@ -39,6 +39,6 @@
         tools:layout="@layout/fragment_details">
         <argument
             android:name="medicine"
-            app:argType="com.musabagab.interviewtest.Database.Medicine" />
+            app:argType="com.musabagab.interviewtest.Model.Medicine" />
     </fragment>
 </navigation>
