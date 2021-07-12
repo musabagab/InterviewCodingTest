@@ -57,7 +57,8 @@ This is my coding test interview code for joining Arlib app
 
 • MockK mocking library for Kotlin
 
-• Kotlin Coroutines ⚙️
+• JUnit for unit testing
+
 
 
   
