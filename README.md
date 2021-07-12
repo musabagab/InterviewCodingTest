@@ -48,6 +48,7 @@ This is my coding test interview code for joining Arlib app
     2. Room database test
     3. Retrofit get request test
     4. Retrofit response status code test
-    5. Greet message test
+    5. Greeting message should conttain name test
+    6. Greeting message display the correct greeting based on time
 
   
